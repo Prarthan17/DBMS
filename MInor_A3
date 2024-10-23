@@ -1,0 +1,39 @@
+//A3: Write a Java Program to access the given excel file with known file format.
+
+import org.apache.poi.ss.usermodel.*;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileInputStream;
+
+import java.io.IOException;
+
+
+public class SimpleExcelReader {
+
+     public static void main(String[] args) {
+     // Specify your Excel file path here
+
+     String filePath = "path/to/your/excel/file.xlsx"; 
+
+      try (FileInputStream file = new FileInputStream(filePath); 
+      Workbook workbook = new XSSFWorkbook(file)) { // For .xlsx files
+
+      // Get the first sheet in the workbook
+       Sheet sheet = workbook.getSheetAt(0);
+
+       // Loop through the rows of the sheet
+        for (Row row : sheet) {
+         // Loop through each cell in the current row
+          for (Cell cell : row) {
+           // Print the cell value directly
+            System.out.print(cell.toString() + "\t");
+                }
+            System.out.println(); // New line after each row
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            }
+          }
+}
